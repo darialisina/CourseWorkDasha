@@ -7,8 +7,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-class System{
-
+class System : public QObject{
+Q_OBJECT
 private:
     QNetworkAccessManager *manager;
     QNetworkRequest request;
@@ -16,7 +16,9 @@ private:
     std::list<New>* news;
 
 public:
-    System();
+    System(QObject *parent = 0);
+
+    ~System();
 
     void getInternetNews();
     void formNews();

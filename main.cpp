@@ -4,8 +4,6 @@
 
 int main(int argc, char *argv[])
 {
-    System sys;
-    sys.getInternetNews();
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
