@@ -6,7 +6,7 @@ void System::getInternetNews()
     request.setUrl(QUrl("https://news.yandex.ru/index.rss"));
     manager -> get(request);
 
-    QObject::connect(manager, &QNetworkAccessManager::finished, [=](QNetworkReply *reply)
+    connect(manager, &QNetworkAccessManager::finished, [=](QNetworkReply *reply)
     {
         if(reply->error()){
             qDebug() << reply->errorString();
@@ -17,9 +17,14 @@ void System::getInternetNews()
     });
 }
 
-System::System(){
+System::System(QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
-    getInternetNews();
-
     news = new std::list<New>;
+
+    getInternetNews();
+}
+
+System::~System() {
+    delete manager;
+    delete news;
 }
