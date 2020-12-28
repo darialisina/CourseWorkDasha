@@ -1,21 +1,32 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "system.h"
-#include <QVBoxLayout>
-#include <QPushButton>
 #include <QListWidget>
-#include <QLabel>
-#include <QLineEdit>
+#include <QtNetwork/QNetworkReply>
 
 void MainWindow::updatedNews(std::list<New>* news)
    {
+    newNews = news;
+
     QListWidget *lstWdgt = ui->listWidget;
     for_each(news->begin(), news->end(), [=](New n)
     {
-       lstWdgt->addItem(n.getTitle());
-//       qDebug() << n.getTitle();
+       QString item ="     " + n.getTitle().toUpper()+"\r\n"+n.getContent();
+       lstWdgt->addItem(item);
       });
+
    }
+
+
+void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    auto found = find_if(newNews->begin(), newNews->end(), [item](New n) {
+            return ("     " + n.getTitle()+"\r\n"+n.getContent()).toLower() == (item->text()).toLower();
+        });
+            QString link = found->getLink();
+            QDesktopServices::openUrl(QUrl(link));
+
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,9 +42,5 @@ MainWindow::~MainWindow()
     delete ui;
     delete sys;
 }
-
-
-
-
 
 

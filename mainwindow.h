@@ -6,6 +6,8 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QListWidget>
+#include <QDesktopServices>
+#include <QUrl>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,10 +25,15 @@ public:
 public slots:
    void updatedNews(std::list<New>* news);
 
+private slots:
+   void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     System *sys;
-    std::list <New> news;
+    std::list <New>* newNews;
+    QNetworkAccessManager *manager;
+    QNetworkRequest request;
 
 };
 #endif // MAINWINDOW_H

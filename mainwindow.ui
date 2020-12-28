@@ -15,18 +15,36 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0">
-     <widget class="QListWidget" name="listWidget"/>
-    </item>
     <item row="2" column="1">
      <widget class="QPushButton" name="pushButton">
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Поиск</string>
       </property>
      </widget>
     </item>
     <item row="2" column="0">
      <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="QListWidget" name="listWidget">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

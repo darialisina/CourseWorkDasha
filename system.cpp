@@ -25,11 +25,6 @@ void System::getInternetNews()
 
 }
 
-void print(const New n)
-{
-    qDebug() << n.getTitle() ;
-}
-
 void System::formNews(QByteArray result)
 {
     QString xmlTitle;
@@ -62,7 +57,6 @@ void System::formNews(QByteArray result)
         }
     }
     emit readyNews(news);
-//    for_each(news->begin(), news->end(),print);
 }
 
 System::System(QObject *parent) : QObject(parent){
