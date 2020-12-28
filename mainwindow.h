@@ -23,9 +23,6 @@ public:
 public slots:
    void updatedNews(std::list<New>* news);
 
-private slots:
-   void on_lineEdit_cursorPositionChanged(int arg1, int arg2);
-
 private:
     Ui::MainWindow *ui;
     System *sys;

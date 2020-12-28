@@ -12,8 +12,8 @@ void MainWindow::updatedNews(std::list<New>* news)
     QListWidget *lstWdgt = ui->listWidget;
     for_each(news->begin(), news->end(), [=](New n)
     {
-//       lstWdgt->addItem(n.getTitle());
-       qDebug() << n.getTitle() ;
+       lstWdgt->addItem(n.getTitle());
+//       qDebug() << n.getTitle();
       });
    }
 
