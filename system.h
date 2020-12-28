@@ -20,8 +20,11 @@ public:
 
     ~System();
 
-   QByteArray getInternetNews();
-   std::list<New> formNews();
+   void getInternetNews();
+   void formNews(QByteArray result);
+
+signals:
+   void readyNews(std::list<New>* news);
 
 };
 

@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include "system.h"
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QListWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,9 +19,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+public slots:
+   void updatedNews(std::list<New>* news);
+
+private slots:
+   void on_lineEdit_cursorPositionChanged(int arg1, int arg2);
+
 private:
     Ui::MainWindow *ui;
     System *sys;
+    std::list <New> news;
 
 };
 #endif // MAINWINDOW_H

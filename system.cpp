@@ -4,10 +4,11 @@
 #include <QXmlStreamReader>
 #include <algorithm>
 #include <iostream>
+#include "mainwindow.h"
 
-QByteArray result;
 
-QByteArray System::getInternetNews()
+
+void System::getInternetNews()
 {
     request.setUrl(QUrl("https://news.yandex.ru/index.rss"));
     manager -> get(request);
@@ -18,32 +19,32 @@ QByteArray System::getInternetNews()
             qDebug() << reply->errorString();
             return;
         }
-       result = reply->readAll();
+         QByteArray result = reply->readAll();
+         formNews(result);
       });
-    return result;
+
 }
 
 void print(const New n)
 {
-    qDebug() << n.getTitle().toStdString().c_str();
+    qDebug() << n.getTitle() ;
 }
 
-std::list<New> System::formNews()
+void System::formNews(QByteArray result)
 {
-    QString xmlTitel;
+    QString xmlTitle;
     QString xmlLink;
     QString xmlDescription;
 
-    QByteArray res = System::getInternetNews();
-    QXmlStreamReader xmlRes(res);
+    QXmlStreamReader xmlRes(result);
     while (!xmlRes.atEnd() && !xmlRes.hasError())
     {
         QXmlStreamReader::TokenType token = xmlRes.readNext();
         if (token == QXmlStreamReader::StartElement)
         {
-            if (xmlRes.name() == "titel")
+            if (xmlRes.name() == "title")
             {
-                xmlTitel = xmlRes.readElementText();
+                xmlTitle = xmlRes.readElementText();
             }
             if (xmlRes.name() == "link")
             {
@@ -56,19 +57,19 @@ std::list<New> System::formNews()
         }
         if (token == QXmlStreamReader::EndElement && xmlRes.name() == "item")
         {
-           New *n = new New(xmlTitel, xmlLink, xmlDescription);
+           New *n = new New(xmlTitle, xmlLink, xmlDescription);
            news->push_back(*n) ;
         }
     }
+    emit readyNews(news);
     for_each(news->begin(), news->end(),print);
-    return *news;
 }
 
 System::System(QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     news = new std::list<New>;
 
-    formNews();
+    getInternetNews();
 }
 
 System::~System() {
