@@ -28,6 +28,8 @@ public slots:
 private slots:
    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
+   void on_pushButton_clicked(QLineEdit *lineEdit, QListWidget *lstWdgt);
+
 private:
     Ui::MainWindow *ui;
     System *sys;
