@@ -10,7 +10,12 @@
 
 void System::getInternetNews()
 {
-    request.setUrl(QUrl("https://news.yandex.ru/index.rss"));
+    std::list <QString> urls;
+    urls.push_back("https://news.yandex.ru/index.rss");
+    urls.push_back("https://lenta.ru/rss/");
+
+    for_each(urls.begin(), urls.end(), [=](QString u){
+    request.setUrl(QUrl(u));
     manager -> get(request);
 
     connect(manager, &QNetworkAccessManager::finished, [=](QNetworkReply *reply)
@@ -22,6 +27,7 @@ void System::getInternetNews()
          QByteArray result = reply->readAll();
          formNews(result);
       });
+    });
 
 }
 

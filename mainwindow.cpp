@@ -48,7 +48,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked(QLineEdit *lineEdit, QListWidget *lstWdgt)
 {
     lstWdgt->clear();
-    lstWdgt->update();
+
 //    for_each(newNews->begin(), newNews->end(), [=](New n){
 //       QString l1 = (n.getTitle()+" "+n.getContent()).toLower();
 
@@ -57,6 +57,6 @@ void MainWindow::on_pushButton_clicked(QLineEdit *lineEdit, QListWidget *lstWdgt
 //           lstWdgt->addItem(item);
 //       }
 
-
 //    });
+    lstWdgt->repaint();
 }
