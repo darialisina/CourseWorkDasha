@@ -45,18 +45,18 @@ MainWindow::~MainWindow()
 
 
 
-void MainWindow::on_pushButton_clicked(QLineEdit *lineEdit, QListWidget *lstWdgt)
+void MainWindow::on_pushButton_clicked()
 {
-    lstWdgt->clear();
+    ui->listWidget->clear();
 
-//    for_each(newNews->begin(), newNews->end(), [=](New n){
-//       QString l1 = (n.getTitle()+" "+n.getContent()).toLower();
+    for_each(newNews->begin(), newNews->end(), [=](New n){
+       QString l1 = (n.getTitle()+" "+n.getContent()).toLower();
 
-//       if (l1.contains((lineEdit->text()).toLower())){
-//           QString item ="     " + n.getTitle().toUpper()+"\r\n"+n.getContent();
-//           lstWdgt->addItem(item);
-//       }
+       if (l1.contains((ui->lineEdit->text()).toLower())){
+           QString item ="     " + n.getTitle().toUpper()+"\r\n"+n.getContent();
+           ui->listWidget->addItem(item);
+       }
 
-//    });
-    lstWdgt->repaint();
+    });
+    ui->listWidget->repaint();
 }
