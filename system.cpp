@@ -3,6 +3,7 @@
 #include "new.h"
 #include <QXmlStreamReader>
 #include <algorithm>
+#include <QByteArray>
 #include <iostream>
 #include "mainwindow.h"
 

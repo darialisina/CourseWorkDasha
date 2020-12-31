@@ -17,6 +17,22 @@ void MainWindow::updatedNews(std::list<New>* news)
 
    }
 
+void MainWindow::on_pushButton_clicked()
+{
+    ui->listWidget->clear();
+
+    for_each(newNews->begin(), newNews->end(), [=](New n){
+       QString l1 = (n.getTitle()+" "+n.getContent()).toLower();
+
+       if (l1.contains((ui->lineEdit->text()).toLower())){
+           QString item ="     " + n.getTitle().toUpper()+"\r\n"+n.getContent();
+           ui->listWidget->addItem(item);
+       }
+
+    });
+    ui->listWidget->repaint();
+}
+
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
@@ -44,19 +60,3 @@ MainWindow::~MainWindow()
 }
 
 
-
-void MainWindow::on_pushButton_clicked()
-{
-    ui->listWidget->clear();
-
-    for_each(newNews->begin(), newNews->end(), [=](New n){
-       QString l1 = (n.getTitle()+" "+n.getContent()).toLower();
-
-       if (l1.contains((ui->lineEdit->text()).toLower())){
-           QString item ="     " + n.getTitle().toUpper()+"\r\n"+n.getContent();
-           ui->listWidget->addItem(item);
-       }
-
-    });
-    ui->listWidget->repaint();
-}
