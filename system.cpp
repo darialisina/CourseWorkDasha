@@ -36,6 +36,7 @@ void System::formNews(QByteArray result)
     QString xmlTitle;
     QString xmlLink;
     QString xmlDescription;
+    std::list<New> *news = new std::list<New>();
 
     QXmlStreamReader xmlRes(result);
     while (!xmlRes.atEnd() && !xmlRes.hasError())
@@ -67,12 +68,10 @@ void System::formNews(QByteArray result)
 
 System::System(QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
-    news = new std::list<New>;
 
     getInternetNews();
 }
 
 System::~System() {
     delete manager;
-    delete news;
 }

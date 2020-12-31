@@ -13,8 +13,6 @@ private:
     QNetworkAccessManager *manager;
     QNetworkRequest request;
 
-    std::list<New>* news;
-
 public:
     System(QObject *parent = 0);
 
