@@ -22,7 +22,7 @@ public:
    void formNews(QByteArray result);
 
 signals:
-   void readyNews(std::list<New>* news);
+   void readyNews(std::list<New> news);
 
 };
 

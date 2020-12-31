@@ -23,7 +23,7 @@ public:
 
 
 public slots:
-   void updatedNews(std::list<New>* news);
+   void updatedNews(std::list<New> news);
 
 private slots:
    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
@@ -33,9 +33,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     System *sys;
-    std::list <New>* newNews;
-    QNetworkAccessManager *manager;
-    QNetworkRequest request;
+    std::list<New> newNews;
+
 
 };
 #endif // MAINWINDOW_H

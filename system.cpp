@@ -37,7 +37,7 @@ void System::formNews(QByteArray result)
     QString xmlTitle;
     QString xmlLink;
     QString xmlDescription;
-    std::list<New> *news = new std::list<New>();
+    std::list<New> news;
 
     QXmlStreamReader xmlRes(result);
     while (!xmlRes.atEnd() && !xmlRes.hasError())
@@ -60,8 +60,7 @@ void System::formNews(QByteArray result)
         }
         if (token == QXmlStreamReader::EndElement && xmlRes.name() == "item")
         {
-           New *n = new New(xmlTitle, xmlLink, xmlDescription);
-           news->push_back(*n) ;
+           news.push_back(New(xmlTitle, xmlLink, xmlDescription)) ;
         }
     }
     emit readyNews(news);
