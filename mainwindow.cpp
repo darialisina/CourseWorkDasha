@@ -4,24 +4,23 @@
 #include <QListWidget>
 #include <QtNetwork/QNetworkReply>
 
-void MainWindow::updatedNews(std::list<New>* news)
-   {
-    newNews = news;
-
+void MainWindow::updatedNews(std::list<New> news)
+{
     QListWidget *lstWdgt = ui->listWidget;
-    for_each(news->begin(), news->end(), [=](New n)
+    for_each(news.begin(), news.end(), [=](New n)
     {
+       newNews.push_back(n);
        QString item ="     " + n.getTitle().toUpper()+"\r\n"+n.getContent();
        lstWdgt->addItem(item);
-      });
+    });
 
-   }
+}
 
 void MainWindow::on_pushButton_clicked()
 {
     ui->listWidget->clear();
 
-    for_each(newNews->begin(), newNews->end(), [=](New n){
+    for_each(newNews.begin(), newNews.end(), [=](New n){
        QString l1 = (n.getTitle()+" "+n.getContent()).toLower();
 
        if (l1.contains((ui->lineEdit->text()).toLower())){
@@ -36,11 +35,12 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    auto found = find_if(newNews->begin(), newNews->end(), [item](New n) {
+    auto found = find_if(newNews.begin(), newNews.end(), [item](New n) {
             return ("     " + n.getTitle()+"\r\n"+n.getContent()).toLower() == (item->text()).toLower();
         });
-            QString link = found->getLink();
-            QDesktopServices::openUrl(QUrl(link));
+
+    QString link = found->getLink();
+    QDesktopServices::openUrl(QUrl(link));
 
 }
 
